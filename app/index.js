@@ -7,7 +7,7 @@ let webgl;
 let gui;
 
 // webgl settings
-webgl = new Webgl(window.innerWidth, window.innerHeight);
+webgl = new Webgl(window.innerWidth/2, window.innerHeight/2);
 document.body.appendChild(webgl.renderer.domElement);
 
 // GUI settings
@@ -16,6 +16,7 @@ gui.add(webgl.params, 'usePostprocessing');
 
 // handle resize
 window.addEventListener('resize', resizeHandler);
+window.addEventListener('click', clickHandler);
 
 // let's play !
 animate();
@@ -24,6 +25,9 @@ function resizeHandler() {
   webgl.resize(window.innerWidth, window.innerHeight);
 }
 
+function clickHandler() {
+  webgl.click();
+}
 function animate() {
   raf(animate);
 

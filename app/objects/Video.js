@@ -4,13 +4,13 @@ export default class Video extends THREE.Object3D {
   constructor() {
     super();
 
-    //
-    // this.createVideo();
-    // this.userMedia();
+
+    this.createVideo();
+    this.userMedia();
 
 
 
-    this.videoTexture = new THREE.Texture();
+    this.videoTexture = new THREE.Texture(this.video);
     this.videoTexture.minFilter = this.videoTexture.magFilter = THREE.LinearFilter;
 
 
@@ -41,16 +41,16 @@ export default class Video extends THREE.Object3D {
   userMedia() {
     console.log('ask user');
     navigator.mozGetUserMedia({video:true}, function(stream){
-      this.video.src    = window.URL.createObjectURL(stream);
+      this.video.src   = window.URL.createObjectURL(stream);
 
     }.bind(this), function(error){
 
     });
   }
   update() {
-    // if( this.video.readyState === this.video.HAVE_ENOUGH_DATA ){
-    //   this.videoTexture.needsUpdate = true;
-    // }
+    if( this.video.readyState === this.video.HAVE_ENOUGH_DATA ){
+      this.videoTexture.needsUpdate = true;
+    }
 
     // this.rotation.x += 0.01;
     // this.rotation.z += 0.01;

@@ -14,6 +14,9 @@ export default class Webgl {
       usePostprocessing: true,
     };
 
+    this.width = width;
+    this.height = height
+
     this.scene = new THREE.Scene();
 
     this.camera = new THREE.PerspectiveCamera(50, width / height, 1, 1000);

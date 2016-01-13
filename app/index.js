@@ -2,6 +2,8 @@ import Webgl from './Webgl';
 import raf from 'raf';
 import dat from 'dat-gui';
 import 'gsap';
+import FilterView from './views/FilterView';
+
 
 let webgl;
 let gui;
@@ -18,11 +20,16 @@ gui.add(webgl.params, 'usePostprocessing');
 window.addEventListener('resize', resizeHandler);
 window.addEventListener('click', clickHandler);
 
+
+
+
+
+
 // let's play !
 animate();
 
 function resizeHandler() {
-  webgl.resize(window.innerWidth, window.innerHeight);
+  webgl.resize(window.innerWidth/2, window.innerHeight/2);
 }
 
 function clickHandler() {

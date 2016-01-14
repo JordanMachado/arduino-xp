@@ -3,13 +3,20 @@
   bottom:0px;
   height: 150px;
   width: 100%;
-  background: rgba(0,0,0,0.6);
   text-align: center;
 
   ul {
+    margin: 0;
+    padding: 0;
+    $size:20px;
     li {
       display: inline-block;
       padding: 10px;
+      margin: 10px;
+      background-color: rgba(0,0,0,0.3);
+      border-radius: 50%;
+      width: $size;
+      height: $size;
     }
   }
 }

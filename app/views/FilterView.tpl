@@ -1,4 +1,4 @@
-<h1>filter type here</h1>
+<h1 class="title">{{title}}</h1>
 <ul class="filters-wrapper">
-  {{#filter}}<li>i'm a filter</li>{{/filter}}
+  {{#filters}}<li class="filter">{{number}}</li>{{/filters}}
 </ul>

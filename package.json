@@ -17,6 +17,7 @@
   "dependencies": {
     "@superguigui/wagner": "^0.1.11",
     "body-parser": "^1.14.2",
+    "component-emitter": "^1.2.0",
     "dat-gui": "*",
     "express": "^4.13.3",
     "glslify": "^5.0.2",

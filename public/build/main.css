@@ -6,37 +6,80 @@ body {
   height: 100%;
   overflow: hidden; }
 
-canvas {
+canvas, .poster {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%); }
 
+.poster {
+  z-index: 10;
+  background: #064663; }
+  .poster .icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    animation: wiggle 2s linear infinite;
+    transform-origin: center left;
+    text-align: center; }
+    .poster .icon .bar {
+      background: white;
+      width: 70px;
+      height: 10px;
+      border-radius: 5px;
+      margin-bottom: 5px; }
+    .poster .icon .circle {
+      background: transparent;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 10px solid white; }
+
 .cadre {
   position: absolute;
   width: 100%;
   height: 0;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(6, 70, 99, 0.2);
   z-index: -1; }
   .cadre.top {
     top: 0px; }
   .cadre.bottom {
     bottom: 0px; }
 
+@keyframes wiggle {
+  0%, 7% {
+    transform: rotateZ(0) translate(-50%, -50%); }
+  15% {
+    transform: rotateZ(-15deg) translate(-50%, -50%); }
+  20% {
+    transform: rotateZ(10deg) translate(-50%, -50%); }
+  25% {
+    transform: rotateZ(-10deg) translate(-50%, -50%); }
+  30% {
+    transform: rotateZ(6deg) translate(-50%, -50%); }
+  35% {
+    transform: rotateZ(-4deg) translate(-50%, -50%); }
+  40%, 100% {
+    transform: rotateZ(0) translate(-50%, -50%); } }
+
 .filters {
   position: absolute;
   bottom: 0px;
   height: 150px;
   width: 100%;
-  text-align: center; }
-  .filters ul {
-    margin: 0;
-    padding: 0; }
-    .filters ul li {
-      display: inline-block;
-      padding: 10px;
-      margin: 10px;
-      background-color: rgba(0, 0, 0, 0.3);
-      border-radius: 50%;
-      width: 20px;
-      height: 20px; }
+  text-align: center;
+  display: table; }
+  .filters .wrapper {
+    display: table-cell;
+    vertical-align: middle; }
+    .filters .wrapper ul {
+      margin: 0;
+      padding: 0; }
+      .filters .wrapper ul li {
+        display: inline-block;
+        padding: 10px;
+        margin: 10px;
+        background-color: rgba(0, 0, 0, 0.3);
+        border-radius: 50%;
+        width: 20px;
+        height: 20px; }

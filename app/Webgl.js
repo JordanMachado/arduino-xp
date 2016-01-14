@@ -15,7 +15,8 @@ export default class Webgl {
 
     this.width = width;
     this.height = height
-    console.log('coucou');
+
+    this.canSnap = false;
 
     this.scene = new THREE.Scene();
 
@@ -64,6 +65,9 @@ export default class Webgl {
     this.snap();
   }
   snap() {
+    if(!this.canSnap) return;
+
+    console.log('snap');
     let strMime = "image/png";
     let imgData = this.renderer.domElement.toDataURL(strMime);
     this.image.src = imgData

@@ -29,6 +29,37 @@
           "img":"src.jpg"
         }
       ]
+    },
+
+    {
+      "id":2,
+      "title":"step2",
+      "filters":[
+        {
+          "number":1,
+          "img":"src.jpg"
+        },
+        {
+          "number":2,
+          "img":"src.jpg"
+        },
+        {
+          "number":3,
+          "img":"src.jpg"
+        },
+        {
+          "number":4,
+          "img":"src.jpg"
+        },
+        {
+          "number":5,
+          "img":"src.jpg"
+        },
+        {
+          "number":6,
+          "img":"src.jpg"
+        }
+      ]
     }
   ]
 }

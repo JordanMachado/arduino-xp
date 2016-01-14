@@ -5,6 +5,7 @@ export default class Video extends THREE.Object3D {
     super();
 
 
+
     // this.createVideo();
     // this.userMedia();
 
@@ -12,6 +13,14 @@ export default class Video extends THREE.Object3D {
 
     // this.videoTexture = new THREE.Texture(this.video);
     this.videoTexture = THREE.ImageUtils.loadTexture( './vlad.jpg' ) ;
+
+
+     this.createVideo();
+     this.userMedia();
+    //
+    //
+    //
+
     this.videoTexture.minFilter = this.videoTexture.magFilter = THREE.LinearFilter;
 
 

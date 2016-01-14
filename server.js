@@ -1,21 +1,31 @@
 var express = require('express');
-
 var bodyParser = require('body-parser');
 var status = require('statuses');
-
-
-var http = require('http')
+var serialport = require('serialport');
+var http = require('http');
 var app = express();
 var server = app.listen(3000);
+var cors = require('cors');
 
-
-var cors = require('cors')
+var sp;
+var number;
+var portName = '/dev/tty.usbmodem1411';
 app.use(cors());
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('./public'));
 
-// twitter
+
+serialport.list(function (err, ports) {
+  ports.forEach(function(port) {
+  	if(port.manufacturer.search("arduino")) {
+  		portName = port.comName;
+  	}
+  });
+  connectToSerialPort();
+});
+
+//tter
 // var Twit  = require('twitter');
 // var T = new Twit({
 //   consumer_key:'tEdHRzqIwQN196zRQXkVkyCtu',
@@ -53,21 +63,47 @@ app.use(express.static('./public'));
 //   res.send('Done');
 // });
 
-
-
-//SOCKET IO
 var io = require('socket.io').listen(server);
+
+//SOCKET IO ++ SERIAL
+
+function connectToSerialPort(){
+	console.log("Connect to Arduino by seriaPort " + portName);
+	sp = new serialport.SerialPort(portName, {
+	    baudRate: 9600,
+	    dataBits: 8,
+	    parity: 'none',
+	    stopBits: 1,
+	    flowControl: false,
+	    parser: serialport.parsers.readline("\r\n")
+	});
+  sp.open( function(error){
+    console.log('Serial Port Opened');
+    sp.on('data', function(data){
+      console.log(data[0]);
+          number = data[0];
+          if(number>=0){
+            //Nombre composé
+              io.emit('number', number);
+          }else if(number == "i"){
+            // Si l'utilisateur est en train de composer
+              io.emit('composing', 'true');
+          }else if(number == "s"){
+            // Déclencheur de photos
+              io.emit('snap', 'snaped');
+          }else if(number == "p"){
+            // Si le téléphonne est reaccroché
+              io.emit('pickedUp', 'false');
+          }
+
+    });
+  });
+}
+// twi
+
 
 //
 //
 app.get('/', function(req, res){
   res.sendfile('public/index.html');
-});
-
-io.on('connection', function(socket){
-  console.log('a user connected');
-
-  socket.on('message', function(msg){
-    console.log('message: ' + msg);
-  });
 });

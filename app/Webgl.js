@@ -4,6 +4,7 @@ var request = require('superagent');
 let WAGNER = require('@superguigui/wagner')
 let VignettePass = require('@superguigui/wagner/src/passes/vignette/VignettePass');
 let InvertPass = require('@superguigui/wagner/src/passes/invert/invertPass');
+let CustomPass = require('./fx/slices/slice');
 window.THREE = THREE;
 import Video from './objects/Video';
 
@@ -50,6 +51,7 @@ export default class Webgl {
     window.composer = this.composer;
     // this.vignettePass = new VignettePass();
     this.invertPass = new InvertPass();
+    this.slicePass = new CustomPass();
   }
 
   resize(width, height) {
@@ -84,6 +86,7 @@ export default class Webgl {
       this.composer.reset();
       this.composer.render(this.scene, this.camera);
       this.composer.pass(this.invertPass);
+      this.composer.pass(this.slicePass);
 
 
       this.composer.toScreen();

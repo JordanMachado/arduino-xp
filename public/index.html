@@ -17,31 +17,9 @@
       <div class="circle"></div>
     </div>
   </div>
+  <script src="./build/vendors/socket.io.js"></script>
   <script src="./build/main.js"></script>
   <script src="./OrbitControls.js"></script>
-  <script src="./build/vendors/socket.io.js"></script>
-<script>
-  var socket = io();
-  socket.on('number', function(num){
-      console.log(num);
-      if (num > 0) {
-        //number.innerHTML = num ;
-        //span.innerHTML = "False";
-      }
-  });
-  socket.on('composing',function(state){
-    console.log(state);
-    if(state){
-      //span.innerHTML = "True";
-    }
-  });
-  socket.on('snap',function(state){
-    console.log(state);
-    if(state){
-      //span.innerHTML = "True";
-    }
-  });
-</script>
 
 </body>
 </html>

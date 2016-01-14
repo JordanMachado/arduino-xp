@@ -15,18 +15,12 @@ export default class Video extends THREE.Object3D {
     this.videoTexture = THREE.ImageUtils.loadTexture( './vlad.jpg' ) ;
 
 
-     this.createVideo();
-     this.userMedia();
-    //
-    //
-    //
-
     this.videoTexture.minFilter = this.videoTexture.magFilter = THREE.LinearFilter;
 
 
 
-    // this.geom = new THREE.PlaneGeometry(16, 16*1.4, 1,1);
-    this.geom = new THREE.PlaneGeometry(16, 16, 1,1);
+    this.geom = new THREE.PlaneGeometry(16, 16*1.4, 1,1);
+    // this.geom = new THREE.PlaneGeometry(16, 16, 1,1);
 
     this.mat = new THREE.MeshBasicMaterial({
       map : this.videoTexture,

@@ -15,12 +15,11 @@
   "author": "Valentin Daguenet <valentin.daguenet@gmail.com> (http://vdaguenet.fr)",
   "license": "MIT",
   "dependencies": {
-    "": "git://github.com/superguigui/wagner",
+
     "body-parser": "^1.14.2",
     "component-emitter": "^1.2.0",
     "dat-gui": "*",
     "express": "^4.13.3",
-    "glslify": "^5.0.2",
     "gsap": "*",
     "inherits": "^2.0.1",
     "mustache": "^2.2.1",

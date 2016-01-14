@@ -93,7 +93,11 @@ function connectToSerialPort(){
               io.emit('snap', 'snaped');
           }else if(number == "p"){
             // Si le téléphonne est reaccroché
-              io.emit('pickedUp', 'false');
+              io.emit('pickedUp', 'true');
+          }
+          else if(number == "r"){
+            // Si le téléphonne est reaccroché
+              io.emit('hangUp', 'true');
           }
 
     });

@@ -16,9 +16,7 @@ export default class FilterView extends Emiter{
     this.off();
     this.datas = datas;
     this.hide();
-    this.on('hiden',()=>{
-      this.render()
-    })
+    
   }
   render() {
     let html = Mustache.to_html(template,this.datas);
@@ -52,6 +50,7 @@ export default class FilterView extends Emiter{
     });
   }
   show() {
+    console.log('show');
     let tl = new TimelineLite({
       onComplete:()=> {
         this.emit('shown');
@@ -69,10 +68,11 @@ export default class FilterView extends Emiter{
 
   }
   hide() {
+    console.log('hide');
     let tl = new TimelineLite({
       onComplete:()=> {
         this.emit('hiden');
-        this.setInitialState();
+      //  this.setInitialState();
       }
     });
     tl.to(this.ui.title,0.5,{

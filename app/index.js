@@ -7,17 +7,18 @@ import FilterView from './views/FilterView';
 import Datas from './datas/data.json';
 
 
-console.log(Datas);
+
 
 let webgl;
 let poster;
 let filterView;
 let gui;
+let step = -1;
 
-
+var socket = io();
 // webgl settings
-// webgl = new Webgl(window.innerWidth/2, window.innerWidth/3.4);
-webgl = new Webgl(window.innerWidth, window.innerWidth);
+webgl = new Webgl(window.innerWidth/2, window.innerWidth/3.4);
+// webgl = new Webgl(window.innerWidth, window.innerWidth);
 document.body.appendChild(webgl.renderer.domElement);
 
 // poster
@@ -43,6 +44,41 @@ window.addEventListener('click', clickHandler);
 animate();
 
 
+socket.on('pickedUp',function(state){
+  console.log(state);
+  if(state){
+    step ++;
+    onStateUpdate(step);
+
+  }
+});
+
+
+socket.on('number', function(num){
+    console.log(num);
+    if (num > 0) {
+      step ++;
+      onStateUpdate(step);
+
+    }
+});
+
+socket.on('snap',function(state){
+  console.log(state);
+  if(state){
+    step ++;
+    onStateUpdate(step);
+
+  }
+});
+socket.on('hangUp',function(state){
+  console.log(state);
+  if(state){
+    step ++;
+    onStateUpdate(step);
+  }
+});
+
 
 /*
  * State 0 ->
@@ -61,9 +97,9 @@ function onStateUpdate(state) {
     break;
     case 2:
       state2();
-
     break;
     case 3:
+      state3();
 
     break;
     default:
@@ -86,12 +122,25 @@ function state0() {
 }
 
 function state1() {
+  console.log('state1');
+
   filterView.render();
 }
 
 function state2() {
+  console.log('state2');
   filterView.update(Datas.steps[1]);
+  filterView.on('hiden',()=>{
+    filterView.render()
+  })
 }
+function state3() {
+  console.log('state3');
+  filterView.off('hiden');
+  filterView.hide();
+  webgl.canSnap = true;
+}
+
 
 function resizeHandler() {
   webgl.resize(window.innerWidth/2, window.innerHeight/2 / 1.4);

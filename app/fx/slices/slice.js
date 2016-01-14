@@ -8,22 +8,25 @@ let Pass = require('@superguigui/wagner/src/Pass');
 var vertex = glslify('@superguigui/wagner/src/shaders/vertex/basic.glsl');
 var fragment = glslify('./slice-fs.glsl');
 
-function Lookup(options) {
+function Slice(options) {
 
   Pass.call(this);
   this.setShader(vertex, fragment);
+  this.params.tick = 0.;
+  this.params.slices = 40.;
 
 }
 
-module.exports = Lookup;
+module.exports = Slice;
 
-Lookup.prototype = Object.create(Pass.prototype);
+Slice.prototype = Object.create(Pass.prototype);
 
-Lookup.prototype.constructor = Lookup;
+Slice.prototype.constructor = Slice;
 
-Lookup.prototype.run = function(composer) {
+Slice.prototype.run = function(composer) {
 
-
+  this.shader.uniforms.tick.value = this.params.tick;
+  this.shader.uniforms.slices.value = this.params.slices;
 
   composer.pass(this.shader);
 };

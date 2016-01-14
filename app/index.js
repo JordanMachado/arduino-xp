@@ -16,7 +16,8 @@ let gui;
 
 
 // webgl settings
-webgl = new Webgl(window.innerWidth/2, window.innerWidth/3.4);
+// webgl = new Webgl(window.innerWidth/2, window.innerWidth/3.4);
+webgl = new Webgl(window.innerWidth, window.innerWidth);
 document.body.appendChild(webgl.renderer.domElement);
 
 // poster

@@ -13,6 +13,7 @@ canvas, .poster {
   transform: translate(-50%, -50%); }
 
 .poster {
+  display: none;
   z-index: 10;
   background: #064663; }
   .poster .icon {

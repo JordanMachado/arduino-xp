@@ -4,7 +4,12 @@ var request = require('superagent');
 let WAGNER = require('@superguigui/wagner')
 let VignettePass = require('@superguigui/wagner/src/passes/vignette/VignettePass');
 let InvertPass = require('@superguigui/wagner/src/passes/invert/invertPass');
-let CustomPass = require('./fx/slices/slice');
+// let SlicePass = require('./fx/slices/slice');
+// let SlicePass = require('./fx/pixelate/pixelate');
+// let SlicePass = require('./fx/polar-pixelate/polar-pixelate');
+// let SlicePass = require('./fx/barrel-blur/barrel-blur');
+// let SlicePass = require('./fx/line/line');
+let SlicePass = require('./fx/mirror/mirror');
 window.THREE = THREE;
 import Video from './objects/Video';
 
@@ -19,6 +24,9 @@ export default class Webgl {
 
     this.canSnap = false;
 
+    this.startTime = Date.now();
+    this.tick = 0.0;
+
     this.scene = new THREE.Scene();
 
     this.camera = new THREE.PerspectiveCamera(50, width / height, 1, 1000);
@@ -32,7 +40,7 @@ export default class Webgl {
     this.initPostprocessing();
 
     this.videoObj = new Video();
-    this.videoObj.position.set(0, 0, 0);
+    this.videoObj.position.set(0, 0, -10);
     this.scene.add(this.videoObj);
 
     this.image = document.createElement('img');
@@ -50,8 +58,10 @@ export default class Webgl {
     this.composer.setSize(window.innerWidth, window.innerHeight);
     window.composer = this.composer;
     // this.vignettePass = new VignettePass();
-    this.invertPass = new InvertPass();
-    this.slicePass = new CustomPass();
+
+    this.slicePass = new SlicePass({
+      time:this.tick
+    });
   }
 
   resize(width, height) {
@@ -85,7 +95,7 @@ export default class Webgl {
     if (this.params.usePostprocessing) {
       this.composer.reset();
       this.composer.render(this.scene, this.camera);
-      this.composer.pass(this.invertPass);
+
       this.composer.pass(this.slicePass);
 
 
@@ -94,6 +104,8 @@ export default class Webgl {
     } else {
       this.renderer.render(this.scene, this.camera);
     }
+    this.tick = 0.0255*(Date.now() - this.startTime);
+    this.slicePass.params.tick =   this.tick ;
 
     this.videoObj.update();
   }

@@ -79,9 +79,9 @@ function state0() {
   TweenLite.to(poster,0.5,{
     autoAlpha:0
   })
-  TweenLite.to(cadres,0.5,{
-    height:size
-  })
+  // TweenLite.to(cadres,0.5,{
+  //   height:size
+  // })
 }
 
 function state1() {

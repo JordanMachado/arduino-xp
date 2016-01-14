@@ -74,7 +74,7 @@ void main() {
   float t = (float(i)+rnd) * reci_num_iter_f;
   vec3 w = spectrum_offset( t );
   sumw += w;
-  sumcol += w * srgb2lin(texture2D( tInput, barrelDistortion(uv, max_distort*t ) ).rgb);
+  sumcol += w * srgb2lin(texture2D( tInput, barrelDistortion(uv, max_distort*t *cos(time*2.)) ).rgb);
   }
   sumcol.rgb /= sumw;
   vec3 outcol = lin2srgb(sumcol.rgb);

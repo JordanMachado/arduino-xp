@@ -63,12 +63,14 @@ export default class FilterView extends Emiter{
     tl.to(this.ui.title,0.5,{
       autoAlpha:1,
       y:0,
-      delay:  (this.firstStep) ? 1:0
+      delay:  (this.firstStep) ? 1:0,
+      ease:Quad.easeOut
     })
-    tl.staggerTo(this.ui.filters,0.5,{
+    tl.staggerTo(this.ui.filters,0.3,{
       autoAlpha:1,
-      y:0
-    },0.25)
+      y:0,
+      ease:Quad.easeOut
+    },0.2)
 
   }
   hide() {
@@ -81,12 +83,14 @@ export default class FilterView extends Emiter{
     });
     tl.to(this.ui.title,0.5,{
       autoAlpha:0,
-      y:-20
+      y:-20,
+      ease:Quad.easeOut
     })
-    tl.staggerTo(this.ui.filters,0.5,{
+    tl.staggerTo(this.ui.filters,0.3,{
       autoAlpha:0,
-      y:-20
-    },0.25,'-=0.4')
+      y:-20,
+      ease:Quad.easeOut
+    },0.20,'-=0.4')
   }
   selectFilter(number) {
     console.log(this.ui.filters[number-1]);

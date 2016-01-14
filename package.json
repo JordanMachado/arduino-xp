@@ -15,6 +15,7 @@
   "author": "Valentin Daguenet <valentin.daguenet@gmail.com> (http://vdaguenet.fr)",
   "license": "MIT",
   "dependencies": {
+    "@superguigui/wagner": "^0.1.13",
     "body-parser": "^1.14.2",
     "component-emitter": "^1.2.0",
     "dat-gui": "*",
@@ -44,6 +45,7 @@
     "cors": "^2.7.1",
     "glslify": "*",
     "media-typer": "^0.3.0",
+    "node-sass": "^3.4.2",
     "raw-body": "^2.1.5",
     "stripify": "*",
     "uglifyjs": "*"

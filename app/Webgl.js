@@ -6,14 +6,15 @@ let WAGNER = require('@superguigui/wagner')
 
 
 // pass
-let VignettePass = require('@superguigui/wagner/src/passes/vignette/VignettePass');
+let LookUp = require('@superguigui/wagner/src/passes/lookup/lookup');
 let InvertPass = require('@superguigui/wagner/src/passes/invert/invertPass');
 let SlicePass = require('./fx/slices/slice');
 let PixelatePass = require('./fx/pixelate/pixelate');
 let PolarPixelatePass = require('./fx/polar-pixelate/polar-pixelate');
-let BarrelBlur = require('./fx/barrel-blur/barrel-blur');
-let Line = require('./fx/line/line');
-let Mirror = require('./fx/mirror/mirror');
+let BarrelBlurPass = require('./fx/barrel-blur/barrel-blur');
+let LinePass = require('./fx/line/line');
+let MirrorPass = require('./fx/mirror/mirror');
+let WobblePass = require('./fx/wobble/wobble');
 
 
 
@@ -30,12 +31,15 @@ export default class Webgl {
     this.height = height;
 
     this.passes = [];
-    this.passes[0] = new Mirror  ({
-      time:this.tick
-    });
-    // this.passes[1] = new InvertPass({
-    //   time:this.tick
-    // });
+    this.passes[1] = new MirrorPass();
+
+
+    this.passes[0] = new LookUp();
+    let texture0 = THREE.ImageUtils.loadTexture('images/lookup.png')
+    texture0.minFilter = texture0.magFilter = THREE.LinearFilter;
+    this.passes[0].params.uLookup = texture0;
+
+
 
     this.canSnap = false;
 
@@ -59,12 +63,10 @@ export default class Webgl {
     this.scene.add(this.videoObj);
 
     this.image = document.createElement('img');
-    this.image.width = 150;
-    this.image.height = 150;
-
-
-
-  //  document.body.appendChild(this.image);
+    this.image.width = width;
+    this.image.height = height;
+    this.image.id = 'preview';
+    document.body.appendChild(this.image);
   }
   initPostprocessing() {
     if (!this.params.usePostprocessing) { return; }
@@ -88,19 +90,76 @@ export default class Webgl {
     this.snap();
   }
   snap() {
-    if(!this.canSnap) return;
+    // if(!this.canSnap) return;
 
     console.log('snap');
     let strMime = "image/png";
-    let imgData = this.renderer.domElement.toDataURL(strMime);
-    this.image.src = imgData
+    this.imgData = this.renderer.domElement.toDataURL(strMime);
+    this.image.src = this.imgData
+    this.image.style.zIndex = 10;
+
+  }
+  sendImg() {
     request
     .post('http://192.168.2.1:3000')
-    .send({ img: imgData})
+    .send({ img: this.imgData})
     .set('Accept', 'application/json')
     .end(function(err, res){
       console.log('end request');
     });
+  }
+  retrySnapshot() {
+    this.image.style.zIndex = -1;
+
+  }
+  updateFilter(number,step) {
+    if(step== 1){
+      let texture = THREE.ImageUtils.loadTexture('images/lookup'+number+'.png')
+      texture.minFilter = texture.magFilter = THREE.LinearFilter;
+      this.passes[0].params.uLookup = texture;
+    } else {
+      let EffectClass = SlicePass;
+      switch (number) {
+        case 0:
+        EffectClass = function(){};
+        break;
+        case 1:
+        EffectClass = BarrelBlurPass
+
+        break;
+        case 2:
+        EffectClass = LinePass
+
+        break;
+        case 3:
+        EffectClass = MirrorPass
+
+        break;
+        case 4:
+        EffectClass = PixelatePass
+
+
+        break;
+        case 5:
+        EffectClass = SlicePass
+
+        break;
+        case 6:
+        EffectClass = PolarPixelatePass
+
+
+        break;
+        case 7:
+        EffectClass = WobblePass
+        break;
+
+        default:
+          EffectClass = SlicePass
+
+      }
+      this.passes[1] = new EffectClass();
+
+    }
   }
   render() {
     if (this.params.usePostprocessing) {

@@ -9,7 +9,7 @@ body {
   font-size: 24px;
 }
 
-canvas, .poster {
+canvas, .poster, #preview {
   position: absolute;
   top:50%;
   left: 50%;
@@ -30,7 +30,9 @@ canvas, .poster {
   }
 }
 
-
+#preview {
+  z-index: -1;
+}
 .advice  {
 
   position: absolute;
@@ -60,6 +62,13 @@ canvas, .poster {
           margin: 10px;
           margin-left: 0px;
         }
+      }
+    }
+    &.step4 {
+      h1  {
+        font-family: 'BaronNeueBlack-Regular';
+        margin-top: 0;
+
       }
     }
   }

@@ -18,6 +18,7 @@ let step = -1;
 
 // webgl settings
 webgl = new Webgl(window.innerWidth/2, window.innerWidth/3.4);
+window.webgl = webgl;
 // webgl = new Webgl(window.innerWidth, window.innerWidth);
 document.body.appendChild(webgl.renderer.domElement);
 
@@ -80,6 +81,9 @@ function onStateUpdate(state) {
     break;
     case 3:
       state3();
+    break;
+    case 4:
+      state4();
 
     break;
     default:
@@ -93,13 +97,16 @@ function state0() {
 
   let size = ( window.innerHeight -(window.innerWidth/3.4)) / 2;
   TweenLite.to(poster,0.5,{
-    autoAlpha:0
+    autoAlpha:0,
+    ease:Quad.easeOut
   })
   TweenLite.to(advice,0.5,{
-    autoAlpha:1
+    autoAlpha:1,
+    ease:Quad.easeOut
   })
   TweenLite.to(document.querySelector('.step1'),0.5,{
-    autoAlpha:1
+    autoAlpha:1,
+    ease:Quad.easeOut
   })
 
 }
@@ -124,7 +131,8 @@ function state1() {
 function state2() {
   console.log('state2');
   TweenLite.to(document.querySelector('.step1'),0.5,{
-    autoAlpha:0
+    autoAlpha:0,
+    ease:Quad.easeOut
   })
   filterView.update(Datas.steps[1]);
   filterView.on('hiden',()=>{
@@ -137,13 +145,36 @@ function state3() {
   filterView.hide();
   filterView.on('hiden',()=>{
     TweenLite.to(document.querySelector('.step3'),0.5,{
-      autoAlpha:1
+      autoAlpha:1,
+      ease:Quad.easeOut
     })
   })
   webgl.canSnap = true;
 
 }
 
+function state4() {
+  console.log();
+  TweenLite.to(document.querySelector('.step3'),0.5,{
+    autoAlpha:0,
+    ease:Quad.easeOut
+  })
+  TweenLite.to(document.querySelector('.step4'),0.5,{
+    autoAlpha:1,
+    ease:Quad.easeOut
+  })
+
+}
+
+function updateFilter(number,step) {
+  webgl.updateFilter(number,step)
+}
+function sendImg(number,step) {
+  webgl.sendImg();
+}
+function retrySnapshot() {
+  webgl.retrySnapshot();
+}
 
 function resizeHandler() {
   webgl.resize(window.innerWidth/2, window.innerHeight/2 / 1.4);

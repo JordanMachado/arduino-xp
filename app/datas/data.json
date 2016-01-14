@@ -1,8 +1,47 @@
 {
   "steps": [
+
     {
       "id":1,
-      "title":"CHOOSE YOUR FILTER",
+      "title":"chOOse yOur filter",
+      "filters":[
+        {
+          "number":1,
+            "img":"images/barrel.png"
+        },
+        {
+          "number":2,
+            "img":"images/blakc_and_white.png"
+        },
+        {
+          "number":3,
+            "img":"images/blue.png"
+        },
+        {
+          "number":4,
+            "img":"images/contraste.png"
+        },
+        {
+          "number":5,
+            "img":"images/exposure.png"
+        },
+        {
+          "number":6,
+            "img":"images/posterize.png"
+        },
+        {
+          "number":7,
+            "img":"images/saturate.png"
+        },
+        {
+          "number":8,
+            "img":"images/seuil.png"
+        }
+      ]
+    },
+    {
+      "id":2,
+      "title":"chOOse yOur effect",
       "filters":[
         {
           "number":1,
@@ -27,39 +66,13 @@
         {
           "number":6,
           "img":"images/polarpixelate.png"
+        },
+        {
+          "number":7,
+          "img":"images/wobble.png"
         }
       ]
     },
 
-    {
-      "id":2,
-      "title":"CHOOSE YOUR EFFECT",
-      "filters":[
-        {
-          "number":1,
-          "img":"src.jpg"
-        },
-        {
-          "number":2,
-          "img":"src.jpg"
-        },
-        {
-          "number":3,
-          "img":"src.jpg"
-        },
-        {
-          "number":4,
-          "img":"src.jpg"
-        },
-        {
-          "number":5,
-          "img":"src.jpg"
-        },
-        {
-          "number":6,
-          "img":"src.jpg"
-        }
-      ]
-    }
   ]
 }

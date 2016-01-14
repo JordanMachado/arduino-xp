@@ -26,6 +26,11 @@
         <li>Tape 3 retry with other effect</li>
       </ul>
     </div>
+    <div class="step4">
+      <h1>cOngratulatiOn</h1>
+      <p>Your image has been tweeted !</p>
+
+    </div>
   </div>
 
 
@@ -58,22 +63,39 @@
         switch (num) {
           case 0:
             //validey
+            sendImg();
+            step = 4;
+            onStateUpdate(4);
+
           break;
           case 1:
             //reprendre la photo
+            retrySnapshot();
           break;
           case 2:
             // retour effets
+            retrySnapshot();
+            step = 2;
+            onStateUpdate(2);
+
+
           break;
           case 3:
             // retour filtre
+            retrySnapshot();
+            onStateUpdate(1);
+            step = 1;
+
+
           break;
           default:
+          sendImg();
+
           // do nothing
           break;
         }
       } else {
-          updateFilter(num);
+          updateFilter(num,step);
       }
     });
 

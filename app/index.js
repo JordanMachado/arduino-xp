@@ -1,12 +1,11 @@
 import Webgl from './Webgl';
 import raf from 'raf';
 import dat from 'dat-gui';
+import domready from 'domready';
 import 'gsap';
 
 import FilterView from './views/FilterView';
 import Datas from './datas/data.json';
-
-
 
 
 let webgl;
@@ -15,7 +14,8 @@ let filterView;
 let gui;
 let step = -1;
 
-var socket = io();
+
+  console.log(  window.socket);
 // webgl settings
 webgl = new Webgl(window.innerWidth/2, window.innerWidth/3.4);
 // webgl = new Webgl(window.innerWidth, window.innerWidth);
@@ -44,40 +44,7 @@ window.addEventListener('click', clickHandler);
 animate();
 
 
-socket.on('pickedUp',function(state){
-  console.log(state);
-  if(state){
-    step ++;
-    onStateUpdate(step);
 
-  }
-});
-
-
-socket.on('number', function(num){
-    console.log(num);
-    if (num > 0) {
-      step ++;
-      onStateUpdate(step);
-
-    }
-});
-
-socket.on('snap',function(state){
-  console.log(state);
-  if(state){
-    step ++;
-    onStateUpdate(step);
-
-  }
-});
-socket.on('hangUp',function(state){
-  console.log(state);
-  if(state){
-    step ++;
-    onStateUpdate(step);
-  }
-});
 
 
 /*
@@ -88,6 +55,7 @@ socket.on('hangUp',function(state){
  */
  window.onStateUpdate = onStateUpdate;
 function onStateUpdate(state) {
+  console.log('onStateUpdates');
   switch (state) {
     case 0:
       state0();

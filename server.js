@@ -90,7 +90,7 @@ function connectToSerialPort(){
               io.emit('composing', 'true');
           }else if(number == "s"){
             // Déclencheur de photos
-              io.emit('snap', 'snaped');
+              io.emit('click', 'clicked');
           }else if(number == "p"){
             // Si le téléphonne est reaccroché
               io.emit('pickedUp', 'true');

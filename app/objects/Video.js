@@ -6,13 +6,13 @@ export default class Video extends THREE.Object3D {
 
 
 
-    // this.createVideo();
-    // this.userMedia();
+    this.createVideo();
+    this.userMedia();
 
 
 
-    // this.videoTexture = new THREE.Texture(this.video);
-    this.videoTexture = THREE.ImageUtils.loadTexture( './vlad.jpg' ) ;
+    this.videoTexture = new THREE.Texture(this.video);
+    // this.videoTexture = THREE.ImageUtils.loadTexture( './vlad.jpg' ) ;
 
 
     this.videoTexture.minFilter = this.videoTexture.magFilter = THREE.LinearFilter;
@@ -53,9 +53,9 @@ export default class Video extends THREE.Object3D {
     });
   }
   update() {
-    // if( this.video.readyState === this.video.HAVE_ENOUGH_DATA ){
-    //   this.videoTexture.needsUpdate = true;
-    // }
+    if( this.video.readyState === this.video.HAVE_ENOUGH_DATA ){
+      this.videoTexture.needsUpdate = true;
+    }
 
     // this.rotation.x += 0.01;
     // this.rotation.z += 0.01;

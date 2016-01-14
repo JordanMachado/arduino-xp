@@ -18,8 +18,66 @@
     </div>
   </div>
   <script src="./build/vendors/socket.io.js"></script>
+  <script type="text/javascript">
+    var step = -1;
+    window.step = step;
+    var socket = io();
+    window.socket= socket;
+    window.socket.on('pickedUp',function(state){
+      console.log(state);
+      if(state && step ==-1){
+        step ++;
+        onStateUpdate(step);
+      }
+    });
+
+
+    window.socket.on('number', function(num){
+      console.log(num);
+
+      if (num >= 0 && step == 3) {
+        console.log('user setup return or validey');
+        switch (num) {
+          case 0:
+            //validey
+          break;
+          case 1:
+            //reprendre la photo
+          break;
+          case 2:
+            // retour effets
+          break;
+          case 3:
+            // retour filtre
+          break;
+          default:
+          // do nothing
+          break;
+        }
+      } else {
+          updateFilter(num);
+      }
+    });
+
+    window.socket.on('click',function(state){
+      console.log(state);
+      if(state && step == 0 || step == 1 || step == 2 && step != 3){
+        console.log('click');
+        step ++;
+        onStateUpdate(step);
+      }
+    });
+    window.socket.on('hangUp',function(state){
+      console.log(state);
+      if(state && step==3){
+        step = -1;
+        onStateUpdate(step);
+      }
+    });
+  </script>
   <script src="./build/main.js"></script>
   <script src="./OrbitControls.js"></script>
+
 
 </body>
 </html>

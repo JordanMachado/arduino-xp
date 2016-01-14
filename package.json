@@ -24,11 +24,13 @@
     "inherits": "^2.0.1",
     "mustache": "^2.2.1",
     "raf": "*",
+    "socket.io": "^1.4.4",
     "statuses": "^1.2.1",
     "stringify": "^3.2.0",
     "superagent": "^1.6.1",
     "three": "^0.73.0",
-    "twit": "^2.1.1"
+    "twitter": "*",
+    "utf-8-validate": "^1.2.1"
   },
   "devDependencies": {
     "babel-plugin-transform-es2015-modules-commonjs": "*",
@@ -36,6 +38,7 @@
     "babelify": "*",
     "browserify": "*",
     "budo": "*",
+    "bufferutil": "^1.2.1",
     "cors": "^2.7.1",
     "glslify": "*",
     "media-typer": "^0.3.0",

@@ -2,6 +2,7 @@ import Webgl from './Webgl';
 import raf from 'raf';
 import dat from 'dat-gui';
 import 'gsap';
+
 import FilterView from './views/FilterView';
 
 
@@ -21,7 +22,10 @@ window.addEventListener('resize', resizeHandler);
 window.addEventListener('click', clickHandler);
 
 
-
+let filterview = new FilterView({el:'.filters',datas:{
+  filter:['1','2','3']
+}});
+filterview.render();
 
 
 

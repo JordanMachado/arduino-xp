@@ -6,7 +6,6 @@ let VignettePass = require('@superguigui/wagner/src/passes/vignette/VignettePass
 let InvertPass = require('@superguigui/wagner/src/passes/invert/invertPass');
 window.THREE = THREE;
 import Video from './objects/Video';
-import FilterView from './views/FilterView';
 
 export default class Webgl {
   constructor(width, height) {
@@ -16,6 +15,7 @@ export default class Webgl {
 
     this.width = width;
     this.height = height
+    console.log('coucou');
 
     this.scene = new THREE.Scene();
 
@@ -37,10 +37,7 @@ export default class Webgl {
     this.image.width = 150;
     this.image.height = 150;
 
-    this.filterview = new FilterView({el:'.filters',datas:{
-      filter:['1','2','3']
-    }})
-    this.filterview.render();
+
 
   //  document.body.appendChild(this.image);
   }

@@ -11,6 +11,7 @@ export default class Video extends THREE.Object3D {
 
 
     this.videoTexture = new THREE.Texture(this.video);
+    // this.videoTexture = new THREE.Texture();
     this.videoTexture.minFilter = this.videoTexture.magFilter = THREE.LinearFilter;
 
 

@@ -15,7 +15,7 @@
   "author": "Valentin Daguenet <valentin.daguenet@gmail.com> (http://vdaguenet.fr)",
   "license": "MIT",
   "dependencies": {
-    "@superguigui/wagner": "^0.1.11",
+    "": "git://github.com/superguigui/wagner",
     "body-parser": "^1.14.2",
     "component-emitter": "^1.2.0",
     "dat-gui": "*",
@@ -25,6 +25,7 @@
     "inherits": "^2.0.1",
     "mustache": "^2.2.1",
     "raf": "*",
+    "serialport": "^2.0.6",
     "socket.io": "^1.4.4",
     "statuses": "^1.2.1",
     "stringify": "^3.2.0",

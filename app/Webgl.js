@@ -2,14 +2,21 @@
 import THREE from 'three';
 var request = require('superagent');
 let WAGNER = require('@superguigui/wagner')
+
+
+
+// pass
 let VignettePass = require('@superguigui/wagner/src/passes/vignette/VignettePass');
 let InvertPass = require('@superguigui/wagner/src/passes/invert/invertPass');
-// let SlicePass = require('./fx/slices/slice');
-// let SlicePass = require('./fx/pixelate/pixelate');
-// let SlicePass = require('./fx/polar-pixelate/polar-pixelate');
-// let SlicePass = require('./fx/barrel-blur/barrel-blur');
-// let SlicePass = require('./fx/line/line');
-let SlicePass = require('./fx/mirror/mirror');
+let SlicePass = require('./fx/slices/slice');
+let PixelatePass = require('./fx/pixelate/pixelate');
+let PolarPixelatePass = require('./fx/polar-pixelate/polar-pixelate');
+let BarrelBlur = require('./fx/barrel-blur/barrel-blur');
+let Line = require('./fx/line/line');
+let Mirror = require('./fx/mirror/mirror');
+
+
+
 window.THREE = THREE;
 import Video from './objects/Video';
 
@@ -20,7 +27,15 @@ export default class Webgl {
     };
 
     this.width = width;
-    this.height = height
+    this.height = height;
+
+    this.passes = [];
+    this.passes[0] = new Mirror  ({
+      time:this.tick
+    });
+    // this.passes[1] = new InvertPass({
+    //   time:this.tick
+    // });
 
     this.canSnap = false;
 
@@ -40,7 +55,7 @@ export default class Webgl {
     this.initPostprocessing();
 
     this.videoObj = new Video();
-    this.videoObj.position.set(0, 0, -10);
+    this.videoObj.position.set(0, 0, 0);
     this.scene.add(this.videoObj);
 
     this.image = document.createElement('img');
@@ -57,11 +72,7 @@ export default class Webgl {
     this.composer = new WAGNER.Composer(this.renderer);
     this.composer.setSize(window.innerWidth, window.innerHeight);
     window.composer = this.composer;
-    // this.vignettePass = new VignettePass();
 
-    this.slicePass = new SlicePass({
-      time:this.tick
-    });
   }
 
   resize(width, height) {
@@ -96,7 +107,11 @@ export default class Webgl {
       this.composer.reset();
       this.composer.render(this.scene, this.camera);
 
-      this.composer.pass(this.slicePass);
+
+      for (var i = 0; i < this.passes.length; i++) {
+
+          this.composer.pass(  this.passes[i]);
+      }
 
 
       this.composer.toScreen();
@@ -104,8 +119,6 @@ export default class Webgl {
     } else {
       this.renderer.render(this.scene, this.camera);
     }
-    this.tick = 0.0255*(Date.now() - this.startTime);
-    this.slicePass.params.tick =   this.tick ;
 
     this.videoObj.update();
   }

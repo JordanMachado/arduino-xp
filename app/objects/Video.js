@@ -6,20 +6,20 @@ export default class Video extends THREE.Object3D {
 
 
 
-    this.createVideo();
-    this.userMedia();
+    // this.createVideo();
+    // this.userMedia();
 
 
 
-    this.videoTexture = new THREE.Texture(this.video);
-    // this.videoTexture = THREE.ImageUtils.loadTexture( './vlad.jpg' ) ;
+    // this.videoTexture = new THREE.Texture(this.video);
+    this.videoTexture = THREE.ImageUtils.loadTexture( './vlad.jpg' ) ;
 
 
     this.videoTexture.minFilter = this.videoTexture.magFilter = THREE.LinearFilter;
 
 
 
-    this.geom = new THREE.PlaneGeometry(16, 16*1.4, 1,1);
+    this.geom = new THREE.PlaneGeometry(16, 11, 1,1);
     // this.geom = new THREE.PlaneGeometry(16, 16, 1,1);
 
     this.mat = new THREE.MeshBasicMaterial({
@@ -53,9 +53,9 @@ export default class Video extends THREE.Object3D {
     });
   }
   update() {
-    if( this.video.readyState === this.video.HAVE_ENOUGH_DATA ){
-      this.videoTexture.needsUpdate = true;
-    }
+    // if( this.video.readyState === this.video.HAVE_ENOUGH_DATA ){
+    //   this.videoTexture.needsUpdate = true;
+    // }
 
     // this.rotation.x += 0.01;
     // this.rotation.z += 0.01;

@@ -2,38 +2,38 @@
   "steps": [
     {
       "id":1,
-      "title":"step1",
+      "title":"CHOOSE YOUR FILTER",
       "filters":[
         {
           "number":1,
-          "img":"src.jpg"
+          "img":"images/barrel.png"
         },
         {
           "number":2,
-          "img":"src.jpg"
+          "img":"images/lines.png"
         },
         {
           "number":3,
-          "img":"src.jpg"
+          "img":"images/mirror.png"
         },
         {
           "number":4,
-          "img":"src.jpg"
+          "img":"images/pixelate.png"
         },
         {
           "number":5,
-          "img":"src.jpg"
+          "img":"images/slice.png"
         },
         {
           "number":6,
-          "img":"src.jpg"
+          "img":"images/polarpixelate.png"
         }
       ]
     },
 
     {
       "id":2,
-      "title":"step2",
+      "title":"CHOOSE YOUR EFFECT",
       "filters":[
         {
           "number":1,

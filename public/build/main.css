@@ -4,7 +4,9 @@ body {
   position: absolute;
   width: 100%;
   height: 100%;
-  overflow: hidden; }
+  overflow: hidden;
+  font-family: 'futura';
+  font-size: 24px; }
 
 canvas, .poster {
   position: absolute;
@@ -12,8 +14,41 @@ canvas, .poster {
   left: 50%;
   transform: translate(-50%, -50%); }
 
+.text {
+  position: absolute;
+  text-align: left;
+  left: 50%;
+  top: 20%;
+  transform: translate(-50%, -50%); }
+  .text h1 {
+    font-size: 55px;
+    font-family: 'BaronNeueBlack-Regular'; }
+
+.advice {
+  position: absolute;
+  bottom: 0%;
+  text-align: center;
+  display: table;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  text-align: left;
+  width: 50%;
+  opacity: 0; }
+  .advice div {
+    position: absolute;
+    opacity: 0; }
+    .advice div.step3 h1 {
+      font-family: 'BaronNeueBlack-Regular';
+      margin-top: 0; }
+    .advice div.step3 ul {
+      margin: 0;
+      padding: 0; }
+      .advice div.step3 ul li {
+        list-style: none;
+        margin: 10px;
+        margin-left: 0px; }
+
 .poster {
-  display: none;
   z-index: 10;
   background: #064663; }
   .poster .icon {
@@ -63,24 +98,59 @@ canvas, .poster {
   40%, 100% {
     transform: rotateZ(0) translate(-50%, -50%); } }
 
+@font-face {
+  font-family: 'BaronNeueBlack-Regular';
+  src: url("baron/BaronNeueBlack_gdi.eot");
+  src: url("baron/BaronNeueBlack_gdi.eot?#iefix") format("embedded-opentype"), url("baron/BaronNeueBlack_gdi.woff") format("woff"), url("baron/BaronNeueBlack_gdi.ttf") format("truetype"), url("baron/BaronNeueBlack_gdi.svg#BaronNeueBlack-Regular") format("svg");
+  font-weight: 900;
+  font-style: normal;
+  font-stretch: normal;
+  unicode-range: U+0020-25CA; }
+
+@font-face {
+  font-family: 'futura';
+  src: url("futura/FuturaLight_gdi.eot");
+  src: url("futura/FuturaLight_gdi.eot?#iefix") format("embedded-opentype"), url("futura/FuturaLight_gdi.woff") format("woff"), url("futura/FuturaLight_gdi.ttf") format("truetype"), url("futura/FuturaLight_gdi.svg#FuturaLight-Regular") format("svg");
+  font-weight: 400;
+  font-style: normal;
+  font-stretch: normal;
+  unicode-range: U+0020-2212; }
+
 .filters {
   position: absolute;
   bottom: 0px;
   height: 150px;
   width: 100%;
   text-align: center;
-  display: table; }
+  display: table;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  text-align: left; }
   .filters .wrapper {
-    display: table-cell;
-    vertical-align: middle; }
+    display: table-cell; }
+    .filters .wrapper .title {
+      font-family: 'BaronNeueBlack-Regular';
+      font-size: 34px;
+      margin-top: 0; }
     .filters .wrapper ul {
       margin: 0;
       padding: 0; }
       .filters .wrapper ul li {
+        text-align: center;
         display: inline-block;
         padding: 10px;
         margin: 10px;
         background-color: rgba(0, 0, 0, 0.3);
         border-radius: 50%;
-        width: 20px;
-        height: 20px; }
+        width: 30px;
+        height: 30px;
+        overflow: hidden; }
+        .filters .wrapper ul li img {
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          z-index: -1;
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          opacity: 0.5; }

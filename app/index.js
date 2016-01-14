@@ -10,12 +10,12 @@ import Datas from './datas/data.json';
 
 let webgl;
 let poster;
+let text;
 let filterView;
 let gui;
 let step = -1;
 
 
-  console.log(  window.socket);
 // webgl settings
 webgl = new Webgl(window.innerWidth/2, window.innerWidth/3.4);
 // webgl = new Webgl(window.innerWidth, window.innerWidth);
@@ -23,8 +23,20 @@ document.body.appendChild(webgl.renderer.domElement);
 
 // poster
 poster = document.querySelector('.poster');
+
 poster.style.width = window.innerWidth/2 + 'px'
 poster.style.height = window.innerWidth/3.4 + 'px'
+
+
+text = document.querySelector('.text');
+text.style.width = window.innerWidth/2 + 'px'
+
+let advice = document.querySelector('.advice');
+advice.style.width = window.innerWidth/2 + 'px'
+let height = ( window.innerHeight -(window.innerWidth/2 / 1.4)) / 2;
+advice.style.height = height+'px';
+
+
 
 // filter view
 filterView = new FilterView({el:'.filters',datas:Datas.steps[0]});
@@ -80,23 +92,40 @@ function state0() {
   console.log('state0');
 
   let size = ( window.innerHeight -(window.innerWidth/3.4)) / 2;
-  let cadres = document.querySelectorAll('.cadre');
   TweenLite.to(poster,0.5,{
     autoAlpha:0
   })
-  // TweenLite.to(cadres,0.5,{
-  //   height:size
-  // })
+  TweenLite.to(advice,0.5,{
+    autoAlpha:1
+  })
+  TweenLite.to(document.querySelector('.step1'),0.5,{
+    autoAlpha:1
+  })
+
 }
 
 function state1() {
   console.log('state1');
+  TweenLite.to(document.querySelector('.step1'),0.5,{
+    autoAlpha:0
+  })
+  if(filterView.isRendered) {
+    filterView.update(Datas.steps[0]);
+    filterView.on('hiden',()=>{
+      filterView.render()
+    })
+  } else {
+    filterView.render()
+  }
 
-  filterView.render();
+
 }
 
 function state2() {
   console.log('state2');
+  TweenLite.to(document.querySelector('.step1'),0.5,{
+    autoAlpha:0
+  })
   filterView.update(Datas.steps[1]);
   filterView.on('hiden',()=>{
     filterView.render()
@@ -106,7 +135,13 @@ function state3() {
   console.log('state3');
   filterView.off('hiden');
   filterView.hide();
+  filterView.on('hiden',()=>{
+    TweenLite.to(document.querySelector('.step3'),0.5,{
+      autoAlpha:1
+    })
+  })
   webgl.canSnap = true;
+
 }
 
 

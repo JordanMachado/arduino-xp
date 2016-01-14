@@ -9,6 +9,7 @@ export default class FilterView extends Emiter{
     this.datas = options.datas;
     this.ui = {}
     this.firstStep =true;
+    this.isRendered = false;
   }
 
   update(datas) {
@@ -16,16 +17,19 @@ export default class FilterView extends Emiter{
     this.off();
     this.datas = datas;
     this.hide();
-    
+
   }
   render() {
     let html = Mustache.to_html(template,this.datas);
     this.el.innerHTML = html;
     let height = ( window.innerHeight -(window.innerWidth/2 / 1.4)) / 2;
     this.el.style.height = height+'px';
+    this.el.style.width = window.innerWidth/2 + 'px'
+
     this.rendered();
   }
   rendered() {
+    this.isRendered = true;
     this.setUI();
     this.setEvents();
     this.setInitialState();

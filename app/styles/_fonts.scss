@@ -1,0 +1,26 @@
+@font-face {
+	font-family:'BaronNeueBlack-Regular';
+	src: url('baron/BaronNeueBlack_gdi.eot');
+	src: url('baron/BaronNeueBlack_gdi.eot?#iefix') format('embedded-opentype'),
+		url('baron/BaronNeueBlack_gdi.woff') format('woff'),
+		url('baron/BaronNeueBlack_gdi.ttf') format('truetype'),
+		url('baron/BaronNeueBlack_gdi.svg#BaronNeueBlack-Regular') format('svg');
+	font-weight: 900;
+	font-style: normal;
+	font-stretch: normal;
+	unicode-range: U+0020-25CA;
+}
+
+
+@font-face {
+	font-family:'futura';
+	src: url('futura/FuturaLight_gdi.eot');
+	src: url('futura/FuturaLight_gdi.eot?#iefix') format('embedded-opentype'),
+		url('futura/FuturaLight_gdi.woff') format('woff'),
+		url('futura/FuturaLight_gdi.ttf') format('truetype'),
+		url('futura/FuturaLight_gdi.svg#FuturaLight-Regular') format('svg');
+	font-weight: 400;
+	font-style: normal;
+	font-stretch: normal;
+	unicode-range: U+0020-2212;
+}

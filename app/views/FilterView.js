@@ -23,6 +23,8 @@ export default class FilterView extends Emiter{
   render() {
     let html = Mustache.to_html(template,this.datas);
     this.el.innerHTML = html;
+    let height = ( window.innerHeight -(window.innerWidth/2 / 1.4)) / 2;
+    this.el.style.height = height+'px';
     this.rendered();
   }
   rendered() {

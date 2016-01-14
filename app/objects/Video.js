@@ -5,6 +5,7 @@ export default class Video extends THREE.Object3D {
     super();
 
 
+
      this.createVideo();
      this.userMedia();
     //
@@ -16,7 +17,7 @@ export default class Video extends THREE.Object3D {
 
 
 
-    this.geom = new THREE.PlaneGeometry(15, 15, 1,1);
+    this.geom = new THREE.PlaneGeometry(16, 16*1.4, 1,1);
 
     this.mat = new THREE.MeshBasicMaterial({
       map : this.videoTexture,

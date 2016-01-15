@@ -165,13 +165,22 @@ function state4() {
   })
 
 }
+window.updateFilter = updateFilter;
 
 function updateFilter(number,step) {
   webgl.updateFilter(number,step)
 }
-function sendImg(number,step) {
+
+window.snap = snap;
+
+function snap() {
+  webgl.snap()
+}
+window.sendImg = sendImg;
+function sendImg() {
   webgl.sendImg();
 }
+window.retrySnapshot = retrySnapshot;
 function retrySnapshot() {
   webgl.retrySnapshot();
 }

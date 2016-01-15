@@ -8,7 +8,7 @@
 </head>
 <body>
   <div class="text">
-    <h1>ROTOPHONE</h1>
+    <h1>rOtOphOne</h1>
     <div class="yolo">Just pick up the phone, take a selfie, choose the best filter and post it on twitter !</div>
   </div>
   <div class="cadre top"></div>
@@ -16,14 +16,14 @@
   <div class="filters"></div>
   <div class="advice">
     <div class="step1">
-      Click on the button on the phone to go validate each step
+      Click the button to validate each step.
     </div>
     <div class="step3">
-      <h1>Validation</h1>
+      <h1>validatiOn</h1>
       <ul>
-        <li>Tape 0 if you want to post it</li>
-        <li>Tape 1 retry with the same effect</li>
-        <li>Tape 3 retry with other effect</li>
+        <li>Click to take the picture.</li>
+        <li>Tape 0 if you want to post it on Twitter</li>
+        <li>Tape 1 to retry with the same effect</li>
       </ul>
     </div>
     <div class="step4">
@@ -47,7 +47,6 @@
     var socket = io();
     window.socket= socket;
     window.socket.on('pickedUp',function(state){
-      console.log(state);
       if(state && step ==-1){
         step ++;
         onStateUpdate(step);
@@ -56,59 +55,32 @@
 
 
     window.socket.on('number', function(num){
-      console.log(num);
-
       if (num >= 0 && step == 3) {
-        console.log('user setup return or validey');
-        switch (num) {
-          case 0:
-            //validey
-            sendImg();
-            step = 4;
-            onStateUpdate(4);
-
-          break;
-          case 1:
-            //reprendre la photo
-            retrySnapshot();
-          break;
-          case 2:
-            // retour effets
-            retrySnapshot();
-            step = 2;
-            onStateUpdate(2);
-
-
-          break;
-          case 3:
-            // retour filtre
-            retrySnapshot();
-            onStateUpdate(1);
-            step = 1;
-
-
-          break;
-          default:
+        if(num == 0) {
           sendImg();
-
-          // do nothing
-          break;
+          step = 4;
+          onStateUpdate(4);
+        } else if (num ==1){
+          retrySnapshot();
+        } else if (num ==3){
+          //
         }
+
+
       } else {
           updateFilter(num,step);
       }
     });
 
     window.socket.on('click',function(state){
-      console.log(state);
       if(state && step == 0 || step == 1 || step == 2 && step != 3){
-        console.log('click');
         step ++;
         onStateUpdate(step);
+      } else {
+        snap();
       }
     });
     window.socket.on('hangUp',function(state){
-      console.log(state);
       if(state && step==3){
         step = -1;
         onStateUpdate(step);

@@ -31,7 +31,7 @@ export default class Webgl {
     this.height = height;
 
     this.passes = [];
-    this.passes[1] = new MirrorPass();
+    this.passes[1] = new function(){};
 
 
     this.passes[0] = new LookUp();
@@ -90,7 +90,7 @@ export default class Webgl {
     this.snap();
   }
   snap() {
-    // if(!this.canSnap) return;
+    if(!this.canSnap) return;
 
     console.log('snap');
     let strMime = "image/png";
@@ -101,7 +101,7 @@ export default class Webgl {
   }
   sendImg() {
     request
-    .post('http://192.168.2.1:3000')
+    .post('http://localhost:3000')
     .send({ img: this.imgData})
     .set('Accept', 'application/json')
     .end(function(err, res){
@@ -119,45 +119,21 @@ export default class Webgl {
       this.passes[0].params.uLookup = texture;
     } else {
       let EffectClass = SlicePass;
-      switch (number) {
-        case 0:
-        EffectClass = function(){};
-        break;
-        case 1:
-        EffectClass = BarrelBlurPass
-
-        break;
-        case 2:
-        EffectClass = LinePass
-
-        break;
-        case 3:
-        EffectClass = MirrorPass
-
-        break;
-        case 4:
-        EffectClass = PixelatePass
+      let effect = [
+        function(){},
+        BarrelBlurPass,
+        LinePass,
+        MirrorPass,
+        PixelatePass,
+        SlicePass,
+        PolarPixelatePass,
+        WobblePass
 
 
-        break;
-        case 5:
-        EffectClass = SlicePass
-
-        break;
-        case 6:
-        EffectClass = PolarPixelatePass
+      ]
 
 
-        break;
-        case 7:
-        EffectClass = WobblePass
-        break;
-
-        default:
-          EffectClass = SlicePass
-
-      }
-      this.passes[1] = new EffectClass();
+      this.passes[1] = new effect[number]();
 
     }
   }
